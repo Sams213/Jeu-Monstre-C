@@ -15,3 +15,9 @@ typedef struct monster
     int level;
     struct monster *next;
 } Monster;
+
+
+Monster monsterlvl1(char *c);
+Monster monsterlvl2(char *c);
+Monster monsterlvl3(char *c);
+void affichageMonstre(Monster m);
