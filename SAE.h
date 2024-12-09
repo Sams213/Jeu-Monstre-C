@@ -8,8 +8,10 @@ typedef struct
     int hp, *score, ngame;
 } Player;
 
-typedef struct
+typedef struct monster
 {
     char name[16];
-    int hp, damage, weapon, level;
+    int hp, damage;
+    int level;
+    struct monster *next;
 } Monster;
