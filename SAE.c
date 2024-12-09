@@ -87,6 +87,5 @@ Monster monsterlvl3(char *c)
 void affichageMonstre(Monster m)
 {
     printf("%s%d%d%d%d", m.name, m.hp, m.damage, m.level);
-    printf("Ses armes sont: \n- Pierre\n- Feuille\n- Ciseaux\n");
-    
+    printf("Ses armes sont: \n- Pierre\n- Feuille\n- Ciseaux\n"); 
 }

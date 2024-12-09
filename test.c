@@ -2,7 +2,9 @@
 
 void test(void)
 {
-
+    Monster m;
+    m = monsterlvl1("Hasbani");
+    aff
 }
 
 
