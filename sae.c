@@ -97,7 +97,7 @@ void affichageMonstre(Monster m)
 }
 
 // DONE
-int duel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
+int ResultatDuel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
     if(strcmp(playerWeapon,monsterWeapon)==0) //compares two strings, returns 0 if equal
         return 0;
@@ -119,20 +119,36 @@ int duel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, return 0
         return 1;
 }
 
-// WIP Antonin
-int Experience(int *state, int* round, Monster m)//state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
-//m.level pour le niveau du monstre; round = 1 -> 50 x lvlMonster, round = 2 -> 100 x lvlMonster
+// DONE Antonin
+int ExperienceRound1(Monster m, Player p) //state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
+//m.level pour le niveau du monstre;
 {
-    
+    p.xp = p.xp + m.level * 50;
 }
 
+// DONE Antonin
+void AttaqueGagnee(Player p)
+{
+    p.xp = p.xp + 10;
+}
+
+// DONE
+int ExperienceRound2(Monster m, Player p) //state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
+//m.level pour le niveau du monstre;
+{
+    p.xp = p.xp + m.level * 100;
+}
+
+// DONE
 int NouvelleHPmonster1(int hp) //nouveeau HP apres la bataille avec monstre lvl 1 et lvl 2
 {
     hp--;
     return hp;
 }
 
+// DONE
 void NouvelleHPmonster3(Player p) //nouveeau HP apres la bataille avec monstre lvl 3
 {
     p.hp = p.hp - 3;
 }
+

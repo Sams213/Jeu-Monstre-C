@@ -5,7 +5,7 @@
 typedef struct
 {
     char pseudo[32];
-    int hp, *score, ngame;
+    int hp, *xp, ngame;
 } Player;
 
 typedef struct monster
@@ -22,4 +22,6 @@ Monster monsterlvl1(char *c);
 Monster monsterlvl2(char *c);
 Monster monsterlvl3(char *c);
 void affichageMonstre(Monster m);
-int duel(char *c1, char *c2);
+int ResultatDuel(char *c1, char *c2);
+int NouvelleHPmonster1(int hp);
+void NouvelleHPmonster3(Player p);

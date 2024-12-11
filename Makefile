@@ -1,4 +1,4 @@
-main: sae.o test.o
+main: sae.o main.o
     gcc -o exec *.o
 
 sae.o: sae.c sae.h
@@ -8,4 +8,4 @@ main.o: main.c
     gcc -c main.c
 
 clean:
-    rm -f *.o sae
+    rm -f *.o exec
