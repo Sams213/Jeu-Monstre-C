@@ -11,18 +11,19 @@
     - La doc est écrite au fur et à mesure
     - Push de code non finit ok mais à annoter et prévenir sur discord
     - TESTER AVANT DE PUSH!!!
-    - Écrire DONE avant une fonction qui est terminée
+    - Écrire DONE lorsqu'une fonction est terminée avant sa déclaration
+    - Écrire WIP suivit de son prénom avant la déclaration d'une fonction en cours de développement
     
     
     TODO:
-    - Fonction qui défini le niveau d'un monstre
+    - DONE Fonction qui défini le niveau d'un monstre
         - Attribuer nb hp, nb weapon, et damage
     
     - Fonctions de matchs différentes pour chaque phase du jeux:
         - Gestion des tours
             - Quelle arme est choisie
-            - Quelle arme gagne
-            - Distribution XP gerée par une fonction
+            - DONE Quelle arme gagne
+            - WIP Distribution XP gerée par une fonction
             - Distribution damage
             - Gestion de la mort
     
@@ -66,7 +67,7 @@ Monster monsterlvl2(char *c)
                6,
                1,
                3,
-               {'P', 'F', 'C'},
+               "PFC",
                2,
                NULL
            };
@@ -88,33 +89,50 @@ Monster monsterlvl3(char *c)
     return m;
 }
 
-// DONE
+// DONE question
 void affichageMonstre(Monster m)
 {
     printf("%s%d%d%d%d", m.name, m.hp, m.damage, m.level);
-    printf("Ses armes sont: \n- Pierre\n- Feuille\n- Ciseaux\n"); 
+    printf("Ses armes sont: \n- Pierre\n- Feuille\n- Ciseaux\n"); //Comment sait-on que ses armes sont celles ci?
 }
 
 // DONE
-int duel(char *c1, char *c2)//C1 = joueur, return 0 for a draw,-1 for a lose, 1 for a win
+int duel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
-    if(strcmp(c1,c2)==0) //compares two strings, returns 0 if equal
+    if(strcmp(playerWeapon,monsterWeapon)==0) //compares two strings, returns 0 if equal
         return 0;
-    if(c1=='P' && c2=='F')
+    if(playerWeapon=='P' && monsterWeapon=='F')
         return 1;
-    if(c1=='P' && c2=='C')
+    if(playerWeapon=='P' && monsterWeapon=='C')
         return -1;
-    if(c1=='F' && c2=='C')
+    if(playerWeapon=='F' && monsterWeapon=='C')
         return -1;
-    if(c1=='F' && c2=='P')
+    if(playerWeapon=='F' && monsterWeapon=='P')
         return 1;
-    if(c1=='C' && c2=='F')
+    if(playerWeapon=='C' && monsterWeapon=='F')
         return 1;
-    if(c1=='C' && c2=='P')
+    if(playerWeapon=='C' && monsterWeapon=='P')
         return -1;
-    if(c2=='#')
+    if(monsterWeapon=='#')
         return -1;
-    if(c2=='O')
+    if(monsterWeapon=='O')
         return 1;
 }
-int 
+
+// WIP Antonin
+int Experience(int *state, int* round, Monster m)//state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
+//m.level pour le niveau du monstre; round = 1 -> 50 x lvlMonster, round = 2 -> 100 x lvlMonster
+{
+    
+}
+
+int NouvelleHPmonster1(int hp) //nouveeau HP apres la bataille avec monstre lvl 1 et lvl 2
+{
+    hp--;
+    return hp;
+}
+
+void NouvelleHPmonster3(Player p) //nouveeau HP apres la bataille avec monstre lvl 3
+{
+    p.hp = p.hp - 3;
+}

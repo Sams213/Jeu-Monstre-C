@@ -1,11 +1,11 @@
 main: sae.o test.o
-	gcc -o main *.o
+    gcc -o exec *.o
 
 sae.o: sae.c sae.h
-	gcc -c sae.c
+    gcc -c sae.c
 
-test.o: test.c
-	gcc -c test.c
+main.o: main.c
+    gcc -c main.c
 
 clean:
-	rm -f *.o
+    rm -f *.o sae
