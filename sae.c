@@ -96,7 +96,7 @@ void affichageMonstre(Monster m)
     printf("Ses armes sont: \n- Pierre\n- Feuille\n- Ciseaux\n"); //Comment sait-on que ses armes sont celles ci?
 }
 
-// DONE
+// DONE question
 int ResultatDuel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
     if(strcmp(playerWeapon,monsterWeapon)==0) //compares two strings, returns 0 if equal
@@ -115,13 +115,12 @@ int ResultatDuel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, 
         return -1;
     if(monsterWeapon=='#')
         return -1;
-    if(monsterWeapon=='O')
+    else
         return 1;
 }
 
 // DONE Antonin
-int ExperienceRound1(Monster m, Player p) //state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
-//m.level pour le niveau du monstre;
+int ExperienceRound1(Monster m, Player p) //state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
 {
     p.xp = p.xp + m.level * 50;
 }
@@ -152,3 +151,34 @@ void NouvelleHPmonster3(Player p) //nouveeau HP apres la bataille avec monstre l
     p.hp = p.hp - 3;
 }
 
+//WIP Antonin
+void Contexte(int phase)
+{
+    printf("Contexte: ");
+    if(phase == 1)
+        printf("vous arrivez dans un corridor, bordé par deux falaises des monstres arrivent les uns après les autres");
+    if(phase == 2)
+        printf("vous arrivez au bout du corridor, une plaine herbeuse apparaît. Malheureusement des monstres sortent de partout pour tous vous attaquer en même temps ou presque...");
+}
+
+//WIP Antonin
+int Menu(void)
+{
+    int choix;
+    printf("------------- Menu -------------\n");
+    printf("1. jouer une partie prédéfinie\n");
+    printf("2. créer une nouvelle partie\n");
+    printf("3. afficher la liste des joueurs triée par nom\n");
+    printf("4. afficher la liste des joueurs triée par meilleur score\n");
+    printf("5. afficher les statistiques d'un joueur\n");
+    printf("9 Quitter\n");
+    printf("--------------------------------\n");
+    printf("choix: ");
+    scanf("%d", "&choix");
+
+    switch(choix){
+        case 1: //TODO APPEL FONCTION
+            break;
+        
+    }
+}
