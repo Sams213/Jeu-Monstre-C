@@ -47,6 +47,15 @@
         - Listes Chainées pour les monstres
 */
 
+void clear(void)
+{
+    #ifdef _WIN32
+	        system("cls"); // Pour Windows
+	#else
+	        system("clear"); // Pour Linux/macOS
+	#endif
+}
+
 // DONE
 Monster monsterlvl1(char *c)
 {
@@ -54,6 +63,7 @@ Monster monsterlvl1(char *c)
         strcpy(m.name,c);
         m.hp = 4;
         m.damage = 1;
+        strcpy(m.weapons,"PFCO");
         m.level = 1;
         m.next = NULL;
         return m;
@@ -62,44 +72,45 @@ Monster monsterlvl1(char *c)
 // DONE
 Monster monsterlvl2(char *c)
 {
-    Monster m = {
-               c,
-               6,
-               1,
-               3,
-               "PFC",
-               2,
-               NULL
-           };
+    Monster m;
+        strcpy(m.name,c);
+        m.hp = 6;
+        m.damage = 2;
+        strcpy(m.weapons,"PFC");
+        m.level = 2;
+        m.next = NULL;
     return m;
 }
 
 // DONE
-Monster monsterlvl3(char *c)
+Monster monsterlvl3(char c[])
 {
-    Monster m = {
-               c,
-               4,
-               2,
-               5,
-               {'P', 'F', 'C', 'O', '#'},
-               3,
-               NULL
-           };
+    Monster m;
+        strcpy(m.name,c);
+        m.hp = 8;
+        m.damage = 3;
+        strcpy(m.weapons,"PFCO#");
+        m.level = 3;
+        m.next = NULL;
     return m;
 }
 
-// DONE question
+// DONE
 void affichageMonstre(Monster m)
 {
-    printf("%s%d%d%d%d", m.name, m.hp, m.damage, m.level);
-    printf("Ses armes sont: \n- Pierre\n- Feuille\n- Ciseaux\n"); //Comment sait-on que ses armes sont celles ci?
+    printf("\n%-15s  hp: %-5d  degats: %-5d  niveau de monstre: %-5d\n", m.name, m.hp, m.damage, m.level);
+    printf("Ses armes sont: \n- %-10s\n- %-10s\n- %-10s\n", "Pierre", "Feuille", "Ciseaux");
+    if (m.level == 1)
+        printf("- %-10s\n", "BonneARien");
+    if (m.level == 3)
+        printf("- %-10s\n- %-10s\n", "BonneARien", "BonneATout");
 }
 
-// DONE question
+
+// DONE
 int ResultatDuel(char playerWeapon, char monsterWeapon)//playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
-    if(strcmp(playerWeapon,monsterWeapon)==0) //compares two strings, returns 0 if equal
+    if(playerWeapon==monsterWeapon) //compares two char, returns 0 if equal
         return 0;
     if(playerWeapon=='P' && monsterWeapon=='F')
         return 1;
@@ -162,7 +173,7 @@ void Contexte(int phase)
 }
 
 //WIP Antonin
-int Menu(void)
+void Menu(void)
 {
     int choix;
     printf("------------- Menu -------------\n");
@@ -173,12 +184,26 @@ int Menu(void)
     printf("5. afficher les statistiques d'un joueur\n");
     printf("9 Quitter\n");
     printf("--------------------------------\n");
+    
     printf("choix: ");
     scanf("%d", "&choix");
+    printf("%d\n", choix);
 
     switch(choix){
         case 1: //TODO APPEL FONCTION
             break;
-        
+        case 2: //TODO APPEL FONCTION
+            break;
+        case 3: //TODO APPEL FONCTION
+            break;
+        case 4: //TODO APPEL FONCTION
+            break;
+        case 5: //TODO APPEL FONCTION
+            break;
+        case 9: //TODO APPEL FONCTION
+            break;
+        default: clear();
+            Menu();
     }
 }
+
