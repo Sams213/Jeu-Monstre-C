@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
-typedef struct
+typedef struct player
 {
     char pseudo[32];
-    int hp, *xp, ngame;
+    int hp, score, ngame;
+    char weapons[3];
+    int degats;
+    struct player *suiv;
 } Player;
 
 typedef struct monster
@@ -17,7 +21,7 @@ typedef struct monster
     struct monster *next;
 } Monster;
 
-
+int generate_random_number(int x);
 Monster monsterlvl1(char *c);
 Monster monsterlvl2(char *c);
 Monster monsterlvl3(char *c);
