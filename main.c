@@ -11,12 +11,11 @@ void test(void)
     affichageMonstre(m1);
     affichageMonstre(m2);
     affichageMonstre(m3);
-    // r=ResultatDuel(c1,c2);
 }
 
 int main(void)
 {
-    // test();
+    test();
     return 0;
 }
 

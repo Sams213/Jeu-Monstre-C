@@ -71,6 +71,7 @@ int generate_random_number(int x)
     return random_number;
 }
 
+// DONE
 Player createPlayer(char pseudo[])
 {
     Player p;
@@ -140,9 +141,9 @@ int ResultatDuel(char playerWeapon, char monsterWeapon) // playerWeapon = joueur
     if (playerWeapon == monsterWeapon) // compares two char, returns 0 if equal
         return 0;
     if (playerWeapon == 'P' && monsterWeapon == 'F')
-        return 1;
-    if (playerWeapon == 'P' && monsterWeapon == 'C')
         return -1;
+    if (playerWeapon == 'P' && monsterWeapon == 'C')
+        return 1;
     if (playerWeapon == 'F' && monsterWeapon == 'C')
         return -1;
     if (playerWeapon == 'F' && monsterWeapon == 'P')
