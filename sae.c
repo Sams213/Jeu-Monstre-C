@@ -71,10 +71,29 @@ int generate_random_number(int x)
     return random_number;
 }
 
+ListeMonstre createListeMonstre(void)
+{
+    return NULL;
+}
+
+ListeMonstre addMonster(ListeMonstre l, Monster m)
+{
+    Monster *new = malloc(sizeof(Monster));
+    if (new == NULL)
+    {
+        exit(1);
+    }
+    *new = m;
+    new->next = l;
+    return new;
+}
+
+
+
 // DONE
 Player createPlayer(char pseudo[])
 {
-    Player p;
+    Player p; 
     strcpy(p.pseudo, pseudo);
     p.hp = 20;
     p.score = 0;

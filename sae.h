@@ -19,7 +19,7 @@ typedef struct monster
     char weapons[5];
     int level;
     struct monster *next;
-} Monster;
+} Monster, *ListeMonstre;
 
 int generate_random_number(int x);
 Monster monsterlvl1(char *c);
