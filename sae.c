@@ -1,4 +1,3 @@
-
 #include "sae.h"
 
 /*
@@ -48,7 +47,10 @@
         - Listes Chainées pour les monstres
 */
 
-// DONE
+/**
+ * @brief properly clears the terminal
+ * 
+ */
 void clear(void)
 {
     #ifdef _WIN32
@@ -58,7 +60,12 @@ void clear(void)
     #endif
 }
 
-// DONE
+/**
+ * @brief generate a random number
+ * 
+ * @param x store the random number
+ * @return int 
+ */
 int generate_random_number(int x)
 {
     static int initialized = 0;
@@ -71,11 +78,13 @@ int generate_random_number(int x)
     return random_number;
 }
 
+//TODO
 ListeMonstre createListeMonstre(void)
 {
     return NULL;
 }
 
+//TODO doc
 ListeMonstre addMonster(ListeMonstre l, Monster m)
 {
     Monster *new = malloc(sizeof(Monster));
@@ -88,6 +97,7 @@ ListeMonstre addMonster(ListeMonstre l, Monster m)
     return new;
 }
 
+//TODO
 void Partie1(Player p, ListeMonstre l)
 {
     Monster m1 = monsterlvl1("Gobelin");
@@ -98,7 +108,12 @@ void Partie1(Player p, ListeMonstre l)
     l = addMonster(l, m3);
 }
 
-// DONE
+/**
+ * @brief Create a Player object
+ * 
+ * @param pseudo 
+ * @return Player 
+ */
 Player createPlayer(char pseudo[])
 {
     Player p;
@@ -112,7 +127,12 @@ Player createPlayer(char pseudo[])
     return p;
 }
 
-// DONE
+/**
+ * @brief create a monster level 1 as it is specify in the subject
+ * 
+ * @param c 
+ * @return Monster 
+ */
 Monster monsterlvl1(char *c)
 {
     Monster m;
@@ -125,7 +145,12 @@ Monster monsterlvl1(char *c)
     return m;
 }
 
-// DONE
+/**
+ * @brief create a monster level 2 as it is specify in the subject
+ * 
+ * @param c 
+ * @return Monster 
+ */
 Monster monsterlvl2(char *c)
 {
     Monster m;
@@ -138,7 +163,12 @@ Monster monsterlvl2(char *c)
     return m;
 }
 
-// DONE
+/**
+ * @brief create a monster level 2 as it is specify in the subject
+ * 
+ * @param c 
+ * @return Monster 
+ */
 Monster monsterlvl3(char c[])
 {
     Monster m;
@@ -151,7 +181,11 @@ Monster monsterlvl3(char c[])
     return m;
 }
 
-// DONE
+/**
+ * @brief print on stdout stats of monster according to its level
+ * 
+ * @param m *object* Monster
+ */
 void affichageMonstre(Monster m)
 {
     printf("\n%-15s  hp: %-5d  degats: %-5d  niveau de monstre: %-5d\n", m.name, m.hp, m.damage, m.level);
@@ -162,7 +196,13 @@ void affichageMonstre(Monster m)
         printf("- %-10s\n- %-10s\n", "BonneARien", "BonneATout");
 }
 
-// DONE
+/**
+ * @brief return the result of a fight
+ * 
+ * @param playerWeapon single capital letter identifying player's weapon 
+ * @param monsterWeapon single capital letter identifying monster's weapon
+ * @return int -1 for player's lose, 0 for a draw, 1 for player's win
+ */
 int ResultatDuel(char playerWeapon, char monsterWeapon) // playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
     if (playerWeapon == monsterWeapon) // compares two char, returns 0 if equal
@@ -192,21 +232,38 @@ int combat(Player p, Monster m)
     int result;
 }
 
-// DONE Antonin
-int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
+/**
+ * @brief give player experience when he kills a monster
+ *
+ * @author Antonin
+ * 
+ * @param m use to retreive monster's level
+ * @param p use to increase player's level 
+ */
+int ExperienceRound1(Monster m, Player p) 
 {
     p.score = p.score + m.level * 50;
 }
 
-// DONE Antonin
+/**
+ * @brief gives player experience when he wins an attack
+ * 
+ * @author Antonin
+ *
+ * @param p use to increase player's level
+ */
 void AttaqueGagnee(Player p)
 {
     p.score = p.score + 10;
 }
 
-// DONE
-int ExperienceRound2(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
-// m.level pour le niveau du monstre;
+/**
+ * @brief gives player experience when he kills a monster in the second phase
+ * 
+ * @param m use to retreive monster's level
+ * @param p use to retreive player's level
+ */
+int ExperienceRound2(Monster m, Player p)
 {
     p.score = p.score + m.level * 100;
 }
@@ -224,8 +281,14 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
     p.hp = p.hp - 3;
 }
 
-// WIP Antonin
-void Contexte(int whatToDo)
+/**
+ * @brief prints peices of contexte to improve gameplay
+ * 
+ * @author Antonin
+ *
+ * @param whatToPrint use to print the right piece of information
+ */
+void Contexte(int whatToPrint)
 {
     printf("Contexte: ");
     switch(whatToDo){
@@ -248,7 +311,10 @@ void Contexte(int whatToDo)
     }
 }
 
-// WIP Antonin
+/**
+ * @brief printf a menu and reacts adequately
+ * 
+ */
 void Menu(void)
 {
     int choix;
