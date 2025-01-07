@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 typedef struct player
 {
@@ -24,7 +25,7 @@ typedef struct monster
 int generate_random_number(int x);
 Monster monsterlvl1(char *c);
 Monster monsterlvl2(char *c);
-Monster monsterlvl3(char *c);
+Monster monsterlvl3(char c[]);
 void affichageMonstre(Monster m);
 int ResultatDuel(char c1, char c2);
 int NouvelleHPmonster1(int hp);
@@ -34,3 +35,14 @@ void AttaqueGagnee(Player p);
 int ExperienceRound2(Monster m, Player p);
 void Contexte(int phase);
 void Menu(void);
+ListeMonstre createListeMonstre(void);
+ListeMonstre addMonster(ListeMonstre l, Monster m);
+void afficherListeMonstre(ListeMonstre l);
+ListeMonstre removeHeadMonster(ListeMonstre l);
+Monster getHeadMonster(ListeMonstre l);
+Player createPlayer(char pseudo[]);
+char choixArme(void);
+void affichagePlayer(Player p);
+bool estMortPlayer(Player p);
+bool estMortMonster(Monster m);
+void combat1(Player p, Monster m);
