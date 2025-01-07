@@ -51,11 +51,11 @@
 // DONE
 void clear(void)
 {
-#ifdef _WIN32
-    system("cls"); // Pour Windows
-#else
-    system("clear"); // Pour Linux/macOS
-#endif
+    #ifdef _WIN32
+        system("cls"); // Pour Windows
+    #else
+        system("clear"); // Pour Linux/macOS
+    #endif
 }
 
 // DONE
@@ -185,6 +185,7 @@ int ResultatDuel(char playerWeapon, char monsterWeapon) // playerWeapon = joueur
         return 1;
 }
 
+//WIP
 int combat(Player p, Monster m)
 {
     char playerWeapon, monsterWeapon;
@@ -224,10 +225,10 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
 }
 
 // WIP Antonin
-void Contexte(int phase)
+void Contexte(int whatToDo)
 {
     printf("Contexte: ");
-    switch(phase){
+    switch(whatToDo){
 	case -2:{
 		printf("Vous succombez à vos blessures, vous n'irai pas plus loin que cette plaine...");
 		delay(5);
@@ -242,7 +243,9 @@ void Contexte(int phase)
         	printf("vous arrivez dans un corridor, bordé par deux falaises des monstres arrivent les uns après les autres");
 	case 2:
 		printf("vous arrivez au bout du corridor, une plaine herbeuse apparaît. Malheureusement des monstres sortent de partout pour tous vous attaquer en même temps ou presque...");
-    }	    
+   	case 3:
+		printf("le monstre %s s'avance pour vous attaquer %s");
+    }
 }
 
 // WIP Antonin
