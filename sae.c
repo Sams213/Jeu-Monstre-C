@@ -200,10 +200,22 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
 void Contexte(int phase)
 {
     printf("Contexte: ");
-    if (phase == 1)
-        printf("vous arrivez dans un corridor, bordé par deux falaises des monstres arrivent les uns après les autres");
-    if (phase == 2)
-        printf("vous arrivez au bout du corridor, une plaine herbeuse apparaît. Malheureusement des monstres sortent de partout pour tous vous attaquer en même temps ou presque...");
+    switch(phase){
+	case -2:{
+		printf("Vous succombez à vos blessures, vous n'irai pas plus loin que cette plaine...");
+		delay(5);
+		printf("RIP");
+		}
+	case -1:{
+		printf("Vous succombez à vos blessures, vous ne verez jamais la fin du corridor...");
+		delay("5");
+		printf("RIP");
+		}
+	case 1:
+        	printf("vous arrivez dans un corridor, bordé par deux falaises des monstres arrivent les uns après les autres");
+	case 2:
+		printf("vous arrivez au bout du corridor, une plaine herbeuse apparaît. Malheureusement des monstres sortent de partout pour tous vous attaquer en même temps ou presque...");
+    }	    
 }
 
 // WIP Antonin
