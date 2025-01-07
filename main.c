@@ -1,7 +1,5 @@
 #include "sae.h"
 
-// Joyeux Noël
-
 void test(void)
 {
     Monster m1, m2, m3, *l;
