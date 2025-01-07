@@ -8,4 +8,4 @@ test.o: main.c
 	gcc -c main.c
 
 clean:
-	rm -f *.o main
+	rm -f *.o main main.exe
