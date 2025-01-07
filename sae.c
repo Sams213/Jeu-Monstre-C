@@ -194,6 +194,18 @@ void afficherListeMonstre(ListeMonstre l)
     }
 }
 
+int hauteurListeMonstre(ListeMonstre l)
+{
+    int hauteur = 0;
+    Monster *tmp = l;
+    while (tmp != NULL)
+    {
+        hauteur++;
+        tmp = tmp->next;
+    }
+    return hauteur;
+}
+
 // DONE
 int ResultatDuel(char playerWeapon, char monsterWeapon) // playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
@@ -222,12 +234,12 @@ char choixArme(void)
 {
     char c;
     printf("Choisissez votre arme parmis P (pierre), F (Feuille) ou C (Ciseaux) : ");
-    scanf("%c", &c);
+    scanf("%c%*c", &c);
     while (c != 'P' && c != 'F' && c != 'C' && c != 'p' && c != 'f' && c != 'c')
     {
         printf("Choisissez votre arme parmis P (pierre), F (Feuille) ou C (Ciseaux) : ");
 
-        scanf(" %c", &c);
+        scanf("%c%*c", &c);
     }
     if (c == 'c')
         c = 'C';
@@ -251,43 +263,55 @@ bool estMortMonster(Monster m)
     return m.hp <= 0;
 }
 
-void combat1(Player p, Monster m)
+int combat1(Player p, ListeMonstre l)
 {
-    affichageMonstre(m);
-    affichagePlayer(p);
+    afficherListeMonstre(l);
+    printf("\n\n\n\n\n");
 
-    while (!estMortPlayer(p) && !estMortMonster(m))
+    while (!estVide(l))
     {
-        char playerWeapon = choixArme();
-        char monsterWeapon = m.weapons[generate_random_number(4)];
-        int result = ResultatDuel(playerWeapon, monsterWeapon);
-        if (result == 0)
+
+        Monster m = getHeadMonster(l);
+        printf("\nVotre score est de %d\n", p.score);
+        while (!estMortPlayer(p) && !estMortMonster(m))
         {
-            printf("Egalité, recommencez\n");
-            continue;
+            char playerWeapon = choixArme();
+            char monsterWeapon = m.weapons[generate_random_number(4)];
+            int result = ResultatDuel(playerWeapon, monsterWeapon);
+            printf("Vous affrontez %s\n", m.name);
+            if (result == 0)
+            {
+                printf("Egalité, recommencez\n");
+                continue;
+            }
+            if (result == -1)
+            {
+                p.hp -= m.damage;
+                printf("Vous avez perdu, il vous reste %d hp\n", p.hp);
+                continue;
+            }
+            if (result == 1)
+            {
+                m.hp -= p.degats;
+                p.score = p.score + 10;
+                printf("Vous avez gagné, il reste %d hp au monstre\n", m.hp);
+                continue;
+            }
         }
-        if (result == -1)
+        if (estMortPlayer(p))
         {
-            p.hp -= m.damage;
-            printf("Vous avez perdu, il vous reste %d hp\n", p.hp);
-            continue;
+            printf("Vous avez perdu\n");
+            Contexte(-1);
+            return -1;
         }
-        if (result == 1)
+        if (estMortMonster(m))
         {
-            m.hp -= p.degats;
-            printf("Vous avez gagné, il reste %d hp au monstre\n", m.hp);
-            continue;
+            l = removeHeadMonster(l);
+            printf("Vous avez battu %s\nIl vous reste %d hp\nIl reste %d monstres à affronter.", m.name, p.hp, hauteurListeMonstre(l));
+            p.score += m.level * 50;
         }
     }
-    if (estMortPlayer(p))
-    {
-        printf("Vous avez perdu\n");
-    }
-    if (estMortMonster(m))
-    {
-        printf("Vous avez gagnée\n");
-        p.score += m.level * 50;
-    }
+    affichagePlayer(p);
 }
 
 // DONE Antonin
@@ -346,7 +370,7 @@ void Menu(void)
     printf("--------------------------------\n");
 
     printf("choix: ");
-    scanf("%d", "&choix");
+    scanf("%d", &choix);
     printf("%d\n", choix);
 
     switch (choix)

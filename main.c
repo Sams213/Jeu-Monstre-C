@@ -25,7 +25,9 @@ void test(void)
     // printf("%c", choixArme());
     p1 = createPlayer("Antonin");
     // affichagePlayer(p1);
-    combat1(p1, getHeadMonster(l));
+    combat1(p1, l);
+    printf("\n\n\n");
+    affichagePlayer(p1);
 }
 
 int main(void)

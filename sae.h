@@ -45,4 +45,6 @@ char choixArme(void);
 void affichagePlayer(Player p);
 bool estMortPlayer(Player p);
 bool estMortMonster(Monster m);
-void combat1(Player p, Monster m);
+int combat1(Player p, ListeMonstre l);
+bool estVide(ListeMonstre l);
+int hauteurListeMonstre(ListeMonstre l);
