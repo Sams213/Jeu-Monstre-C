@@ -57,6 +57,17 @@ void clear(void)
 #endif
 }
 
+void simulateTyping(char *str, int delay)
+{
+    while (*str)
+    {
+        printf("%c", *str);
+        fflush(stdout);
+        usleep(delay);
+        str++;
+    }
+}
+
 // DONE
 int generate_random_number(int x)
 {
@@ -68,6 +79,75 @@ int generate_random_number(int x)
     }
     int random_number = rand() % (x + 1);
     return random_number;
+}
+
+// DONE
+Player *createPlayer(char pseudo[])
+{
+    Player *p = (Player *)malloc(sizeof(Player));
+    strcpy(p->pseudo, pseudo);
+    p->hp = 20;
+    p->score = 0;
+    p->ngame = 0;
+    strcpy(p->weapons, "PFC");
+    p->degats = 1;
+    p->suiv = NULL;
+    return p;
+}
+
+ListePlayer *createListePlayer(void)
+{
+    ListePlayer *l = (ListePlayer *)malloc(sizeof(ListePlayer));
+    if (l == NULL)
+    {
+        exit(1);
+    }
+    l->first = NULL;
+    l->last = NULL;
+    return l;
+}
+
+void addPlayer(ListePlayer *l, Player *p)
+{
+    if (l->last == NULL)
+    {
+        l->first = p;
+        l->last = p;
+        return;
+    }
+    l->last->suiv = p;
+    l->last = p;
+}
+
+void removeHeadPlayer(ListePlayer *l)
+{
+    if (l->first == NULL)
+    {
+        printf("Liste vide\n");
+        return;
+    }
+    Player *tmp = l->first;
+    l->first = l->first->suiv;
+    if (l->first == NULL)
+    {
+        l->last = NULL;
+    }
+    free(tmp);
+}
+
+bool estVidePlayer(ListePlayer l)
+{
+    return l.first == NULL;
+}
+
+Player getHeadPlayer(ListePlayer l)
+{
+    if (l.first == NULL)
+    {
+        printf("Liste vide\n");
+        exit(1);
+    }
+    return *(l.first);
 }
 
 // DONE
@@ -114,62 +194,59 @@ Monster getHeadMonster(ListeMonstre l)
 }
 
 // DONE
-Player createPlayer(char pseudo[])
-{
-    Player p;
-    strcpy(p.pseudo, pseudo);
-    p.hp = 20;
-    p.score = 0;
-    p.ngame = 0;
-    strcpy(p.weapons, "PFC");
-    p.degats = 1;
-    p.suiv = NULL;
-    return p;
-}
-
-// DONE
 Monster monsterlvl1(char *c)
 {
-    Monster m;
-    strcpy(m.name, c);
-    m.hp = 4;
-    m.damage = 1;
-    strcpy(m.weapons, "PFCO");
-    m.level = 1;
-    m.next = NULL;
-    return m;
+    Monster *m = (Monster *)malloc(sizeof(Monster));
+    strcpy(m->name, c);
+    m->hp = 4;
+    m->damage = 1;
+    strcpy(m->weapons, "PFCO");
+    m->level = 1;
+    m->next = NULL;
+    return *m;
 }
 
 // DONE
 Monster monsterlvl2(char *c)
 {
-    Monster m;
-    strcpy(m.name, c);
-    m.hp = 6;
-    m.damage = 2;
-    strcpy(m.weapons, "PFC");
-    m.level = 2;
-    m.next = NULL;
-    return m;
+    Monster *m = (Monster *)malloc(sizeof(Monster));
+    strcpy(m->name, c);
+    m->hp = 6;
+    m->damage = 2;
+    strcpy(m->weapons, "PFC");
+    m->level = 2;
+    m->next = NULL;
+    return *m;
 }
 
 // DONE
-Monster monsterlvl3(char c[])
+Monster monsterlvl3(char *c)
 {
-    Monster m;
-    strcpy(m.name, c);
-    m.hp = 8;
-    m.damage = 3;
-    strcpy(m.weapons, "PFCO#");
-    m.level = 3;
-    m.next = NULL;
-    return m;
+    Monster *m = (Monster *)malloc(sizeof(Monster));
+    strcpy(m->name, c);
+    m->hp = 8;
+    m->damage = 3;
+    strcpy(m->weapons, "PFCO#");
+    m->level = 3;
+    m->next = NULL;
+    return *m;
 }
 
 void affichagePlayer(Player p)
 {
     printf("\n%-15s  hp: %-5d  score: %-5d  nombre de parties: %-5d\n", p.pseudo, p.hp, p.score, p.ngame);
     printf("Ses armes sont: \n- %-10s\n- %-10s\n- %-10s\n", "Pierre", "Feuille", "Ciseaux");
+}
+
+void affichageListePlayer(ListePlayer l)
+{
+    Player *tmp = l.first;
+    while (tmp->suiv != NULL)
+    {
+        affichagePlayer(*tmp);
+        tmp = tmp->suiv;
+    }
+    affichagePlayer(*tmp);
 }
 
 // DONE
@@ -186,6 +263,7 @@ void affichageMonstre(Monster m)
 // DONE
 void afficherListeMonstre(ListeMonstre l)
 {
+    int i = 1;
     Monster *tmp = l;
     while (tmp != NULL)
     {
@@ -207,26 +285,48 @@ int hauteurListeMonstre(ListeMonstre l)
 }
 
 // DONE
-int ResultatDuel(char playerWeapon, char monsterWeapon) // playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
+int ResultatDuel(Player *p, Monster *m) // playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
+    int result = 0;
+    char playerWeapon = choixArme();
+    char monsterWeapon = m->weapons[generate_random_number(4)];
     if (playerWeapon == monsterWeapon) // compares two char, returns 0 if equal
-        return 0;
-    if (playerWeapon == 'P' && monsterWeapon == 'F')
-        return -1;
-    if (playerWeapon == 'P' && monsterWeapon == 'C')
-        return 1;
-    if (playerWeapon == 'F' && monsterWeapon == 'C')
-        return -1;
-    if (playerWeapon == 'F' && monsterWeapon == 'P')
-        return 1;
-    if (playerWeapon == 'C' && monsterWeapon == 'F')
-        return 1;
-    if (playerWeapon == 'C' && monsterWeapon == 'P')
-        return -1;
-    if (monsterWeapon == '#')
-        return -1;
+        result = 0;
+    else if (playerWeapon == 'P' && monsterWeapon == 'F')
+        result = -1;
+    else if (playerWeapon == 'P' && monsterWeapon == 'C')
+        result = 1;
+    else if (playerWeapon == 'F' && monsterWeapon == 'C')
+        result = -1;
+    else if (playerWeapon == 'F' && monsterWeapon == 'P')
+        result = 1;
+    else if (playerWeapon == 'C' && monsterWeapon == 'F')
+        result = 1;
+    else if (playerWeapon == 'C' && monsterWeapon == 'P')
+        result = -1;
+    else if (monsterWeapon == '#')
+        result = -1;
     else
-        return 1;
+        result = 1;
+    clear();
+    if (result == 0)
+    {
+        printf("Egalité, recommencez\n");
+    }
+    if (result == -1)
+    {
+        p->hp -= m->damage;
+        if (p->hp < 0)
+            p->hp = 0;
+        printf("Vous avez perdu, il vous reste %d hp\n", p->hp);
+    }
+    if (result == 1)
+    {
+        m->hp -= p->degats;
+        p->score = p->score + 10;
+        printf("Vous avez gagné, il reste %d hp au monstre\n", m->hp);
+    }
+    return result;
 }
 
 // DONE
@@ -263,55 +363,72 @@ bool estMortMonster(Monster m)
     return m.hp <= 0;
 }
 
-int combat1(Player p, ListeMonstre l)
+int combat1(Player *p, ListeMonstre l)
 {
-    afficherListeMonstre(l);
-    printf("\n\n\n\n\n");
-
     while (!estVide(l))
     {
-
-        Monster m = getHeadMonster(l);
-        printf("\nVotre score est de %d\n", p.score);
-        while (!estMortPlayer(p) && !estMortMonster(m))
+        int result;
+        Monster *m = l;
+        printf("\nVotre score est de %d\n", p->score);
+        while (!estMortPlayer(*p) && !estMortMonster(*m))
         {
-            char playerWeapon = choixArme();
-            char monsterWeapon = m.weapons[generate_random_number(4)];
-            int result = ResultatDuel(playerWeapon, monsterWeapon);
-            printf("Vous affrontez %s\n", m.name);
-            if (result == 0)
-            {
-                printf("Egalité, recommencez\n");
-                continue;
-            }
-            if (result == -1)
-            {
-                p.hp -= m.damage;
-                printf("Vous avez perdu, il vous reste %d hp\n", p.hp);
-                continue;
-            }
-            if (result == 1)
-            {
-                m.hp -= p.degats;
-                p.score = p.score + 10;
-                printf("Vous avez gagné, il reste %d hp au monstre\n", m.hp);
-                continue;
-            }
+            afficherListeMonstre(l);
+            printf("\n\n\n\n\n");
+            result = ResultatDuel(p, m);
         }
-        if (estMortPlayer(p))
+
+        if (estMortPlayer(*p))
         {
-            printf("Vous avez perdu\n");
             Contexte(-1);
+            affichagePlayer(*p);
+            afficherListeMonstre(l);
             return -1;
         }
-        if (estMortMonster(m))
+        if (estMortMonster(*m))
         {
             l = removeHeadMonster(l);
-            printf("Vous avez battu %s\nIl vous reste %d hp\nIl reste %d monstres à affronter.", m.name, p.hp, hauteurListeMonstre(l));
-            p.score += m.level * 50;
+            printf("Vous avez battu %s\nIl vous reste %d hp\nIl reste %d monstres à affronter.", m->name, p->hp, hauteurListeMonstre(l));
+            p->score += m->level * 50;
         }
     }
-    affichagePlayer(p);
+    return 1;
+}
+
+int combat2(Player *p, ListeMonstre l)
+{
+    Monster *tmp = l;
+    while (!estVide(l))
+    {
+        afficherListeMonstre(l);
+        printf("\n\n\n\n\n");
+        printf("\nVous affrontez %s\n\n", tmp->name);
+        ResultatDuel(p, tmp);
+        if (estMortPlayer(*p))
+        {
+            Contexte(-1);
+            affichagePlayer(*p);
+            afficherListeMonstre(l);
+            return -1;
+        }
+        if (estMortMonster(*tmp))
+        {
+            l = removeHeadMonster(l);
+            printf("Vous avez battu %s\nIl vous reste %d hp\nIl reste %d monstres à affronter.", tmp->name, p->hp, hauteurListeMonstre(l));
+            p->score += tmp->level * 100;
+        }
+        if (tmp->next == NULL)
+            tmp = l;
+        else
+            tmp = tmp->next;
+    }
+}
+
+void load(void)
+{
+}
+
+void save(ListePlayer lp)
+{
 }
 
 // DONE Antonin
@@ -349,11 +466,19 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
 // WIP Antonin
 void Contexte(int phase)
 {
-    printf("Contexte: ");
+    printf("\nContexte: \n");
     if (phase == 1)
         printf("vous arrivez dans un corridor, bordé par deux falaises des monstres arrivent les uns après les autres");
     if (phase == 2)
         printf("vous arrivez au bout du corridor, une plaine herbeuse apparaît. Malheureusement des monstres sortent de partout pour tous vous attaquer en même temps ou presque...");
+    if (phase == -1)
+        printf("Vous êtes mort, vous avez perdu la partie\n\n");
+    if (phase == 0)
+    {
+        simulateTyping("Vous avez triomphé contre la 1ere horde de monstre, en allant chercher de quoi manger, vous trouvez une baie magique qui vous rend +5hp supplémentaire, avant de tomber sur un groupe de monstre qui ont l'air un peu plus fort que le 1er groupe, vous allez devoir les affronter.", 1000);
+        printf("\n\nAppuyez sur entrée pour continuer...\n");
+        getchar();
+    }
 }
 
 // WIP Antonin
