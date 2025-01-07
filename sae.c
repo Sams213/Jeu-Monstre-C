@@ -71,6 +71,33 @@ int generate_random_number(int x)
     return random_number;
 }
 
+ListeMonstre createListeMonstre(void)
+{
+    return NULL;
+}
+
+ListeMonstre addMonster(ListeMonstre l, Monster m)
+{
+    Monster *new = malloc(sizeof(Monster));
+    if (new == NULL)
+    {
+        exit(1);
+    }
+    *new = m;
+    new->next = l;
+    return new;
+}
+
+void Partie1(Player p, ListeMonstre l)
+{
+    Monster m1 = monsterlvl1("Gobelin");
+    Monster m2 = monsterlvl1("Orc");
+    Monster m3 = monsterlvl1("Troll");
+    l = addMonster(l, m1);
+    l = addMonster(l, m2);
+    l = addMonster(l, m3);
+}
+
 // DONE
 Player createPlayer(char pseudo[])
 {
