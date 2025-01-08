@@ -57,6 +57,12 @@ void clear(void)
 #endif
 }
 
+/**
+ * @brief function simulating typing
+ * 
+ * @param str what to print
+ * @param delay at which speed
+ */
 void simulateTyping(char *str, int delay)
 {
     while (*str)
@@ -68,7 +74,12 @@ void simulateTyping(char *str, int delay)
     }
 }
 
-// DONE
+/**
+ * @brief generates a random number
+ * 
+ * @param x stores the number
+ * @return int 
+ */
 int generate_random_number(int x)
 {
     static int initialized = 0;
@@ -81,7 +92,12 @@ int generate_random_number(int x)
     return random_number;
 }
 
-// DONE
+/**
+ * @brief Create a Player object
+ * 
+ * @param pseudo 
+ * @return Player 
+ */
 Player *createPlayer(char pseudo[])
 {
     Player *p = (Player *)malloc(sizeof(Player));
@@ -193,7 +209,12 @@ Monster getHeadMonster(ListeMonstre l)
     return *l;
 }
 
-// DONE
+/**
+ * @brief create a monster level 1 as it is specify in the subject
+ * 
+ * @param c 
+ * @return Monster 
+ */
 Monster monsterlvl1(char *c)
 {
     Monster *m = (Monster *)malloc(sizeof(Monster));
@@ -206,7 +227,12 @@ Monster monsterlvl1(char *c)
     return *m;
 }
 
-// DONE
+/**
+ * @brief create a monster level 2 as it is specify in the subject
+ * 
+ * @param c 
+ * @return Monster 
+ */
 Monster monsterlvl2(char *c)
 {
     Monster *m = (Monster *)malloc(sizeof(Monster));
@@ -219,7 +245,12 @@ Monster monsterlvl2(char *c)
     return *m;
 }
 
-// DONE
+/**
+ * @brief create a monster level 2 as it is specify in the subject
+ * 
+ * @param c 
+ * @return Monster 
+ */
 Monster monsterlvl3(char *c)
 {
     Monster *m = (Monster *)malloc(sizeof(Monster));
@@ -249,7 +280,11 @@ void affichageListePlayer(ListePlayer l)
     affichagePlayer(*tmp);
 }
 
-// DONE
+/**
+ * @brief print on stdout stats of monster according to its level
+ * 
+ * @param m *object* Monster
+ */
 void affichageMonstre(Monster m)
 {
     printf("\n%-15s  hp: %-5d  degats: %-5d  niveau de monstre: %-5d\n", m.name, m.hp, m.damage, m.level);
@@ -284,7 +319,13 @@ int hauteurListeMonstre(ListeMonstre l)
     return hauteur;
 }
 
-// DONE
+/**
+ * @brief return the result of a fight
+ * 
+ * @param playerWeapon single capital letter identifying player's weapon 
+ * @param monsterWeapon single capital letter identifying monster's weapon
+ * @return int -1 for player's lose, 0 for a draw, 1 for player's win
+ */
 int ResultatDuel(Player *p, Monster *m) // playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
     int result = 0;
@@ -431,19 +472,37 @@ void save(ListePlayer lp)
 {
 }
 
-// DONE Antonin
+/**
+ * @brief give player experience when he kills a monster
+ *
+ * @author Antonin
+ * 
+ * @param m use to retreive monster's level
+ * @param p use to increase player's level 
+ */
 int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
 {
     p.score = p.score + m.level * 50;
 }
 
-// DONE Antonin
+/**
+ * @brief gives player experience when he wins an attack
+ * 
+ * @author Antonin
+ *
+ * @param p use to increase player's level
+ */
 void AttaqueGagnee(Player p)
 {
     p.score = p.score + 10;
 }
 
-// DONE
+/**
+ * @brief gives player experience when he kills a monster in the second phase
+ * 
+ * @param m use to retreive monster's level
+ * @param p use to retreive player's level
+ */
 int ExperienceRound2(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
 // m.level pour le niveau du monstre;
 {
@@ -463,7 +522,13 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
     p.hp = p.hp - 3;
 }
 
-// WIP Antonin
+/**
+ * @brief prints peices of contexte to improve gameplay
+ * 
+ * @author Antonin
+ *
+ * @param whatToPrint use to print the right piece of information
+ */
 void Contexte(int phase)
 {
     printf("\nContexte: \n");
@@ -481,7 +546,10 @@ void Contexte(int phase)
     }
 }
 
-// WIP Antonin
+/**
+ * @brief printf a menu and reacts adequately
+ * 
+ */
 void Menu(void)
 {
     int choix;
