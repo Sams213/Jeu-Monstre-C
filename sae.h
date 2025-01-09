@@ -65,4 +65,5 @@ Player getHeadPlayer(ListePlayer l);
 int combat2(Player *p, ListeMonstre l);
 void simulateTyping(char *str, int speed);
 void inserer(Player *lp, Player *p);
-void addPlayer(Player *lpFirst, Player *p);
+void addPlayer(ListePlayer *l, Player *p);
+void addPlayerEnQueue(ListePlayer *l, Player *p);

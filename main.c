@@ -4,7 +4,6 @@ void test(void)
 {
     clear();
     Monster m1, m2, m3, *l;
-    Player *p1, *p2, *p3, *p4;
     l = createListeMonstre();
     char c1 = 'P', c2 = 'F', c3 = 'C', c4 = '#', c5 = 'O';
     int r, N = 10;
@@ -24,15 +23,18 @@ void test(void)
     // affichageMonstre(m2);
     // affichageMonstre(m3);
     // printf("%c", choixArme());
+    Player *p1, *p2, *p3, *p4, *p5;
     ListePlayer *lp = createListePlayer();
     p1 = createPlayer("Antonin");
     p2 = createPlayer("Pouclet");
     p3 = createPlayer("Delobel");
     p4 = createPlayer("Delage");
-    addPlayer(lp->first, p1);
-    addPlayer(lp->first, p2);
-    affichageListePlayer(*lp);
-    addPlayer(lp->first, p3);
+    p5 = createPlayer("Zarzour");
+    addPlayer(lp, p2);
+    addPlayer(lp, p5);
+    addPlayer(lp, p1);
+    addPlayer(lp, p3);
+    addPlayer(lp, p4);
     printf("\n\n\n\n\n");
     affichageListePlayer(*lp);
     // addPlayer(lp, p2);

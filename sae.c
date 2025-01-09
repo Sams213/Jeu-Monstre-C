@@ -49,7 +49,7 @@
 
 /**
  * @brief clears treminal as OS expects it
- * 
+ *
  */
 void clear(void)
 {
@@ -114,11 +114,11 @@ Player *createPlayer(char pseudo[])
     return p;
 }
 
-//todo
+// todo
 /**
  * @brief creates a liste player object
- * 
- * @return ListePlayer* 
+ *
+ * @return ListePlayer*
  */
 ListePlayer *createListePlayer(void)
 {
@@ -134,6 +134,18 @@ ListePlayer *createListePlayer(void)
 
 void addPlayerEnTete(ListePlayer *l, Player *p)
 {
+    if (l->first == NULL)
+    {
+        l->first = p;
+        l->last = p;
+        return;
+    }
+    p->suiv = l->first;
+    l->first = p;
+}
+
+void addPlayerEnQueue(ListePlayer *l, Player *p)
+{
     if (l->last == NULL)
     {
         l->first = p;
@@ -144,21 +156,45 @@ void addPlayerEnTete(ListePlayer *l, Player *p)
     l->last = p;
 }
 
-void addPlayer(Player *lpFirst, Player *p)
+void addPlayer(ListePlayer *lp, Player *p)
 {
-    Player *tmp;
-    tmp = lpFirst;
-    if (tmp->suiv == NULL)
+    if (lp->first == NULL)
     {
-        inserer(tmp, p);
+        printf("Debut\n");
+        addPlayerEnTete(lp, p);
         return;
     }
-    if (strcmp(tmp->pseudo, p->pseudo) > 0)
+    Player *tmp = lp->first;
+    if (strcmp(lp->first->pseudo, p->pseudo) > 0)
     {
-        inserer(tmp, p);
+        printf("Avant %s\t%d\n", tmp->pseudo, strcmp(tmp->pseudo, p->pseudo));
+        addPlayerEnTete(lp, p);
         return;
     }
-    return addPlayer(tmp->suiv, p);
+    while (true)
+    {
+        if (tmp->suiv == NULL)
+        {
+            printf("Fin\n");
+            addPlayerEnQueue(lp, p);
+            break;
+        }
+
+        if (strcmp(tmp->suiv->pseudo, p->pseudo) == 0)
+        {
+            printf("Same\n");
+            break;
+        }
+
+        if (strcmp(tmp->suiv->pseudo, p->pseudo) > 0)
+        {
+            printf("Avant %s\t%d\n", tmp->suiv->pseudo, strcmp(tmp->suiv->pseudo, p->pseudo));
+            inserer(tmp, p);
+            break;
+        }
+
+        tmp = tmp->suiv;
+    }
 }
 
 void inserer(Player *lp, Player *p)
@@ -198,10 +234,10 @@ Player getHeadPlayer(ListePlayer l)
     return *(l.first);
 }
 
-//todo
+// todo
 /**
  * @brief create a list of monster
- * 
+ *
  * @return NULL
  */
 ListeMonstre createListeMonstre(void)
@@ -211,10 +247,10 @@ ListeMonstre createListeMonstre(void)
 
 /**
  * @brief adds monster to the list
- * 
+ *
  * @param l list of monster
  * @param m specific monster we want to add
- * @return ListeMonstre 
+ * @return ListeMonstre
  */
 ListeMonstre addMonster(ListeMonstre l, Monster m)
 {
