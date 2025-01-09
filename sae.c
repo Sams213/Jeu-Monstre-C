@@ -47,7 +47,10 @@
         - Listes Chainées pour les monstres
 */
 
-// DONE
+/**
+ * @brief clears treminal as OS expects it
+ * 
+ */
 void clear(void)
 {
 #ifdef _WIN32
@@ -111,6 +114,12 @@ Player *createPlayer(char pseudo[])
     return p;
 }
 
+//todo
+/**
+ * @brief creates a liste player object
+ * 
+ * @return ListePlayer* 
+ */
 ListePlayer *createListePlayer(void)
 {
     ListePlayer *l = (ListePlayer *)malloc(sizeof(ListePlayer));
@@ -123,6 +132,12 @@ ListePlayer *createListePlayer(void)
     return l;
 }
 
+/**
+ * @brief adds player to the list
+ * 
+ * @param l pointer to the list
+ * @param p pointer to the player
+ */
 void addPlayer(ListePlayer *l, Player *p)
 {
     if (l->last == NULL)
@@ -135,6 +150,12 @@ void addPlayer(ListePlayer *l, Player *p)
     l->last = p;
 }
 
+//todo
+/**
+ * @brief 
+ * 
+ * @param l 
+ */
 void removeHeadPlayer(ListePlayer *l)
 {
     if (l->first == NULL)
@@ -166,13 +187,24 @@ Player getHeadPlayer(ListePlayer l)
     return *(l.first);
 }
 
-// DONE
+//todo
+/**
+ * @brief create a list of monster
+ * 
+ * @return NULL
+ */
 ListeMonstre createListeMonstre(void)
 {
     return NULL;
 }
 
-// DONE
+/**
+ * @brief adds monster to the list
+ * 
+ * @param l list of monster
+ * @param m specific monster we want to add
+ * @return ListeMonstre 
+ */
 ListeMonstre addMonster(ListeMonstre l, Monster m)
 {
     Monster *new = (Monster *)malloc(sizeof(Monster));
