@@ -511,37 +511,19 @@ void save(ListePlayer lp)
 {
 }
 
-/**
- * @brief give player experience when he kills a monster
- *
- * @author Antonin
- *
- * @param m use to retreive monster's level
- * @param p use to increase player's level
- */
+
 int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
 {
     p.score = p.score + m.level * 50;
 }
 
-/**
- * @brief gives player experience when he wins an attack
- *
- * @author Antonin
- *
- * @param p use to increase player's level
- */
+
 void AttaqueGagnee(Player p)
 {
     p.score = p.score + 10;
 }
 
-/**
- * @brief gives player experience when he kills a monster in the second phase
- *
- * @param m use to retreive monster's level
- * @param p use to retreive player's level
- */
+
 int ExperienceRound2(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
 // m.level pour le niveau du monstre;
 {
@@ -561,13 +543,7 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
     p.hp = p.hp - 3;
 }
 
-/**
- * @brief prints peices of contexte to improve gameplay
- *
- * @author Antonin
- *
- * @param whatToPrint use to print the right piece of information
- */
+
 void Contexte(int phase)
 {
     printf("\nContexte: \n");
@@ -585,10 +561,7 @@ void Contexte(int phase)
     }
 }
 
-/**
- * @brief printf a menu and reacts adequately
- *
- */
+
 void Menu(void)
 {
     int choix;

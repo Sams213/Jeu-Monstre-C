@@ -75,6 +75,22 @@ ListePlayer *createListePlayer(void);
 void addPlayer(ListePlayer *l, Player *p);
 
 /**
+ * @brief adds player
+ * 
+ * @param lpFirst 
+ * @param p 
+ */
+void addPlayer(Player *lpFirst, Player *p);
+
+/**
+ * @brief inserts data in a list
+ * 
+ * @param lp 
+ * @param p 
+ */
+void inserer(Player *lp, Player *p);
+
+/**
  * @brief removes the first player in the list
  * 
  * @param l list
@@ -157,22 +173,134 @@ Monster monsterlvl3(char *c);
  */
 void affichageListePlayer(ListePlayer l);
 
+/**
+ * @brief output player's stats
+ * 
+ * @param p player object
+ */
+void affichagePlayer(Player p);
+
+
+/**
+ * @brief displays monster
+ * 
+ * @param m list of monsters
+ */
 void affichageMonstre(Monster m);
+
+/**
+ * @brief displays list of monster with their details
+ * 
+ * @param l list of monsters
+ */
+void afficherListeMonstre(ListeMonstre l);
+
+/**
+ * @brief calculate depth of list
+ * 
+ * @param l 
+ * @return int 
+ */
+int hauteurListeMonstre(ListeMonstre l);
+
+/**
+ * @brief return the output of a match
+ * 
+ * @param p weapon of the player
+ * @param m random weapon of the monster
+ * @return int -1 lose, 0 draw, 1 win
+ */
 int ResultatDuel(Player *p, Monster *m);
+
+/**
+ * @brief let the player coose their weapon
+ * 
+ * @return char 
+ */
+char choixArme(void);
+
+/**
+ * @brief kills the player
+ * 
+ * @param p player's hp
+ */
+bool estMortPlayer(Player p);
+
+/**
+ * @brief kills the monster
+ * 
+ * @param m 
+ */
+bool estMortMonster(Monster m);
+
+/**
+ * @brief function for any fight of the first phase
+ * 
+ * @param p player 
+ * @param l list of monsters
+ * @return int victory or defeat
+ */
+int combat1(Player *p, ListeMonstre l);
+
+/**
+ * @brief function for any fight of the second phase
+ * 
+ * @param p player
+ * @param l list of monsters
+ * @return int victory or defeat
+ */
+int combat2(Player *p, ListeMonstre l);
+
+/**
+ * @brief give player experience when he kills a monster
+ *
+ * @author Antonin
+ *
+ * @param m use to retreive monster's level
+ * @param p use to increase player's level
+ */
+int ExperienceRound1(Monster m, Player p);
+
+/**
+ * @brief gives player experience when he wins an attack
+ *
+ * @author Antonin
+ *
+ * @param p use to increase player's level
+ */
+void AttaqueGagnee(Player p);
+
+/**
+ * @brief gives player experience when he kills a monster in the second phase
+ *
+ * @author Antonin
+ *
+ * @param m use to retreive monster's level
+ * @param p use to retreive player's level
+ */
+int ExperienceRound2(Monster m, Player p);
+
+/**
+ * @brief calculate new hp of player
+ * 
+ * @param hp 
+ * @return int 
+ */
 int NouvelleHPmonster1(int hp);
 void NouvelleHPmonster3(Player p);
-int ExperienceRound1(Monster m, Player p);
-void AttaqueGagnee(Player p);
-int ExperienceRound2(Monster m, Player p);
+
+/**
+ * @brief prints peices of contexte to improve gameplay
+ *
+ * @author Antonin
+ *
+ * @param whatToPrint use to print the right piece of information
+ */
 void Contexte(int phase);
+
+/**
+ * @brief printf a menu and reacts adequately
+ *
+ * @author Antonin
+ */
 void Menu(void);
-void afficherListeMonstre(ListeMonstre l);
-char choixArme(void);
-void affichagePlayer(Player p);
-bool estMortPlayer(Player p);
-bool estMortMonster(Monster m);
-int combat1(Player *p, ListeMonstre l);
-int hauteurListeMonstre(ListeMonstre l);
-int combat2(Player *p, ListeMonstre l);
-void inserer(Player *lp, Player *p);
-void addPlayer(Player *lpFirst, Player *p);
