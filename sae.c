@@ -47,10 +47,6 @@
         - Listes Chainées pour les monstres
 */
 
-/**
- * @brief clears treminal as OS expects it
- * 
- */
 void clear(void)
 {
 #ifdef _WIN32
@@ -187,7 +183,7 @@ Player getHeadPlayer(ListePlayer l)
     return *(l.first);
 }
 
-//todo
+
 /**
  * @brief create a list of monster
  * 
