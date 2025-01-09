@@ -174,4 +174,5 @@ bool estMortMonster(Monster m);
 int combat1(Player *p, ListeMonstre l);
 int hauteurListeMonstre(ListeMonstre l);
 int combat2(Player *p, ListeMonstre l);
-void insererEnTete(Player *lp, Player *p);
+void inserer(Player *lp, Player *p);
+void addPlayer(Player *lpFirst, Player *p);

@@ -128,13 +128,7 @@ ListePlayer *createListePlayer(void)
     return l;
 }
 
-/**
- * @brief adds player to the list
- * 
- * @param l pointer to the list
- * @param p pointer to the player
- */
-void addPlayer(ListePlayer *l, Player *p)
+void addPlayerEnTete(ListePlayer *l, Player *p)
 {
     if (l->last == NULL)
     {
@@ -146,12 +140,29 @@ void addPlayer(ListePlayer *l, Player *p)
     l->last = p;
 }
 
-//todo
-/**
- * @brief 
- * 
- * @param l 
- */
+void addPlayer(Player *lpFirst, Player *p)
+{
+    Player *tmp;
+    tmp = lpFirst;
+    if (tmp->suiv == NULL)
+    {
+        inserer(tmp, p);
+        return;
+    }
+    if (strcmp(tmp->pseudo, p->pseudo) > 0)
+    {
+        inserer(tmp, p);
+        return;
+    }
+    return addPlayer(tmp->suiv, p);
+}
+
+void inserer(Player *lp, Player *p)
+{
+    p->suiv = lp->suiv;
+    lp->suiv = p;
+}
+
 void removeHeadPlayer(ListePlayer *l)
 {
     if (l->first == NULL)

@@ -29,10 +29,10 @@ void test(void)
     p2 = createPlayer("Pouclet");
     p3 = createPlayer("Delobel");
     p4 = createPlayer("Delage");
-    addPlayer(lp, p1);
-    addPlayer(lp, p2);
+    addPlayer(lp->first, p1);
+    addPlayer(lp->first, p2);
     affichageListePlayer(*lp);
-    insererEnTete(p1, p3);
+    addPlayer(lp->first, p3);
     printf("\n\n\n\n\n");
     affichageListePlayer(*lp);
     // addPlayer(lp, p2);
