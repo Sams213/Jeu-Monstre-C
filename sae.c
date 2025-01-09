@@ -62,7 +62,7 @@ void clear(void)
 
 /**
  * @brief function simulating typing
- * 
+ *
  * @param str what to print
  * @param delay at which speed
  */
@@ -79,9 +79,9 @@ void simulateTyping(char *str, int delay)
 
 /**
  * @brief generates a random number
- * 
+ *
  * @param x stores the number
- * @return int 
+ * @return int
  */
 int generate_random_number(int x)
 {
@@ -97,9 +97,9 @@ int generate_random_number(int x)
 
 /**
  * @brief Create a Player object
- * 
- * @param pseudo 
- * @return Player 
+ *
+ * @param pseudo
+ * @return Player
  */
 Player *createPlayer(char pseudo[])
 {
@@ -243,9 +243,9 @@ Monster getHeadMonster(ListeMonstre l)
 
 /**
  * @brief create a monster level 1 as it is specify in the subject
- * 
- * @param c 
- * @return Monster 
+ *
+ * @param c
+ * @return Monster
  */
 Monster monsterlvl1(char *c)
 {
@@ -261,9 +261,9 @@ Monster monsterlvl1(char *c)
 
 /**
  * @brief create a monster level 2 as it is specify in the subject
- * 
- * @param c 
- * @return Monster 
+ *
+ * @param c
+ * @return Monster
  */
 Monster monsterlvl2(char *c)
 {
@@ -279,9 +279,9 @@ Monster monsterlvl2(char *c)
 
 /**
  * @brief create a monster level 2 as it is specify in the subject
- * 
- * @param c 
- * @return Monster 
+ *
+ * @param c
+ * @return Monster
  */
 Monster monsterlvl3(char *c)
 {
@@ -314,7 +314,7 @@ void affichageListePlayer(ListePlayer l)
 
 /**
  * @brief print on stdout stats of monster according to its level
- * 
+ *
  * @param m *object* Monster
  */
 void affichageMonstre(Monster m)
@@ -353,8 +353,8 @@ int hauteurListeMonstre(ListeMonstre l)
 
 /**
  * @brief return the result of a fight
- * 
- * @param playerWeapon single capital letter identifying player's weapon 
+ *
+ * @param playerWeapon single capital letter identifying player's weapon
  * @param monsterWeapon single capital letter identifying monster's weapon
  * @return int -1 for player's lose, 0 for a draw, 1 for player's win
  */
@@ -508,9 +508,9 @@ void save(ListePlayer lp)
  * @brief give player experience when he kills a monster
  *
  * @author Antonin
- * 
+ *
  * @param m use to retreive monster's level
- * @param p use to increase player's level 
+ * @param p use to increase player's level
  */
 int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
 {
@@ -519,7 +519,7 @@ int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée,
 
 /**
  * @brief gives player experience when he wins an attack
- * 
+ *
  * @author Antonin
  *
  * @param p use to increase player's level
@@ -531,7 +531,7 @@ void AttaqueGagnee(Player p)
 
 /**
  * @brief gives player experience when he kills a monster in the second phase
- * 
+ *
  * @param m use to retreive monster's level
  * @param p use to retreive player's level
  */
@@ -556,7 +556,7 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
 
 /**
  * @brief prints peices of contexte to improve gameplay
- * 
+ *
  * @author Antonin
  *
  * @param whatToPrint use to print the right piece of information
@@ -580,7 +580,7 @@ void Contexte(int phase)
 
 /**
  * @brief printf a menu and reacts adequately
- * 
+ *
  */
 void Menu(void)
 {

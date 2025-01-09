@@ -64,3 +64,4 @@ void affichageListePlayer(ListePlayer l);
 Player getHeadPlayer(ListePlayer l);
 int combat2(Player *p, ListeMonstre l);
 void simulateTyping(char *str, int speed);
+void insererEnTete(Player *lp, Player *p);

@@ -26,10 +26,15 @@ void test(void)
     // printf("%c", choixArme());
     ListePlayer *lp = createListePlayer();
     p1 = createPlayer("Antonin");
-    // p2 = createPlayer("Pouclet");
-    // p3 = createPlayer("Delobel");
-    // p4 = createPlayer("Delage");
+    p2 = createPlayer("Pouclet");
+    p3 = createPlayer("Delobel");
+    p4 = createPlayer("Delage");
     addPlayer(lp, p1);
+    addPlayer(lp, p2);
+    affichageListePlayer(*lp);
+    insererEnTete(p1, p3);
+    printf("\n\n\n\n\n");
+    affichageListePlayer(*lp);
     // addPlayer(lp, p2);
     // addPlayer(lp, p3);
     // addPlayer(lp, p4);
@@ -43,21 +48,21 @@ void test(void)
     // affichagePlayer(getHeadPlayer(*lp));
 
     // affichagePlayer(p1);
-    combat1(p1, l);
+    // combat1(p1, l);
     // affichagePlayer(*lp);
-    Contexte(0);
+    // Contexte(0);
     // printf("\n\n\n");
-    m1 = monsterlvl1("Goblin");
-    m2 = monsterlvl1("Orc");
-    m3 = monsterlvl1("Troll");
-    l = createListeMonstre();
-    l = addMonster(l, m1);
-    l = addMonster(l, m2);
-    l = addMonster(l, m3);
-    p1->hp += 5;
-    clear();
+    // m1 = monsterlvl1("Goblin");
+    // m2 = monsterlvl1("Orc");
+    // m3 = monsterlvl1("Troll");
+    // l = createListeMonstre();
+    // l = addMonster(l, m1);
+    // l = addMonster(l, m2);
+    // l = addMonster(l, m3);
+    // p1->hp += 5;
+    // clear();
 
-    combat2(p1, l);
+    // combat2(p1, l);
     // simulateTyping("Bienvenue dans le jeu.     ", 20000);
 }
 
