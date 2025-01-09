@@ -230,7 +230,6 @@ Player getHeadPlayer(ListePlayer l)
     return *(l.first);
 }
 
-
 /**
  * @brief create a list of monster
  *
@@ -547,18 +546,15 @@ void save(ListePlayer lp)
 {
 }
 
-
 int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
 {
     p.score = p.score + m.level * 50;
 }
 
-
 void AttaqueGagnee(Player p)
 {
     p.score = p.score + 10;
 }
-
 
 int ExperienceRound2(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu
 // m.level pour le niveau du monstre;
@@ -579,7 +575,6 @@ void NouvelleHPmonster3(Player p) // nouveeau HP apres la bataille avec monstre 
     p.hp = p.hp - 3;
 }
 
-
 void Contexte(int phase)
 {
     printf("\nContexte: \n");
@@ -596,7 +591,6 @@ void Contexte(int phase)
         getchar();
     }
 }
-
 
 void Menu(void)
 {
