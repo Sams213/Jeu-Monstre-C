@@ -123,7 +123,7 @@ ListePlayer *createListePlayer(void)
     return l;
 }
 
-void addPlayer(ListePlayer *l, Player *p)
+void addPlayerEnTete(ListePlayer *l, Player *p)
 {
     if (l->last == NULL)
     {
@@ -135,7 +135,24 @@ void addPlayer(ListePlayer *l, Player *p)
     l->last = p;
 }
 
-void insererEnTete(Player *lp, Player *p)
+void addPlayer(Player *lpFirst, Player *p)
+{
+    Player *tmp;
+    tmp = lpFirst;
+    if (tmp->suiv == NULL)
+    {
+        inserer(tmp, p);
+        return;
+    }
+    if (strcmp(tmp->pseudo, p->pseudo) > 0)
+    {
+        inserer(tmp, p);
+        return;
+    }
+    return addPlayer(tmp->suiv, p);
+}
+
+void inserer(Player *lp, Player *p)
 {
     p->suiv = lp->suiv;
     lp->suiv = p;
