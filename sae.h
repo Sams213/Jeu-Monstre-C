@@ -33,6 +33,7 @@ typedef struct
 {
     char name[16];
     int score;
+    int nbParties;
 } Score;
 
 /**
@@ -236,7 +237,7 @@ bool estMortMonster(Monster m);
  * @param l list of monsters
  * @return int victory or defeat
  */
-int combat1(Player *p, ListeMonstre l);
+int combat1(Player *p, ListeMonstre *l);
 
 /**
  * @brief function for any fight of the second phase
@@ -300,3 +301,13 @@ void Contexte(int phase);
  * @author Antonin
  */
 void Menu(void);
+
+void affichageScore(Score s);
+
+Score *saveScore(Player p, Score tScore[], int nb);
+
+void affichageListeScore(Score tScore[], int nb);
+
+void save(ListePlayer *lp, Score tScore[], int nb);
+
+Score *load(ListePlayer *lp, Score tScore[], int *nb);

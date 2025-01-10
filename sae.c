@@ -152,6 +152,64 @@ void addPlayerEnQueue(ListePlayer *l, Player *p)
     l->last = p;
 }
 
+Score *saveScore(Player p, Score tScore[], int nb)
+{
+    Score *temp;
+    Score s;
+    strcpy(s.name, p.pseudo);
+    s.score = p.score;
+    s.nbParties = p.ngame;
+    if (tScore == NULL)
+    {
+        printf("\nInsertion au debut\n");
+        tScore = (Score *)malloc(sizeof(Score));
+        if (tScore == NULL)
+        {
+            printf("Erreur d'allocation mémoire\n");
+        }
+        tScore[0] = s;
+        return tScore;
+    }
+    temp = realloc(tScore, (nb + 1) * sizeof(Score));
+    if (temp == NULL)
+    {
+        printf("Erreur d'allocation mémoire\n");
+    }
+    tScore = temp;
+    for (int i = 0; i < nb; i++)
+    {
+        if (tScore[i].score < s.score)
+        {
+            for (int j = nb; j > i; j--)
+            {
+                tScore[j] = tScore[j - 1];
+            }
+            printf("\n1) Insertion à l'index %d\n", i);
+            tScore[i] = s;
+            break;
+        }
+        printf("\n2)Insertion à l'index %d\n", nb - 1);
+        tScore[nb - 1] = s;
+        break;
+    }
+    return tScore;
+}
+
+void affichageScore(Score s)
+{
+    printf("%-20s|\t%d\t\t|\t%d\n", s.name, s.nbParties, s.score);
+}
+
+void affichageListeScore(Score tScore[], int nb)
+{
+    printf("%-20s|\t%s\t|\t%s\n", "Pseudo", "NbParties", "Score");
+    printf("-------------------------------------------------------------\n");
+    for (int i = 0; i < nb; i++)
+    {
+        affichageScore(tScore[i]);
+    }
+}
+
 void addPlayer(ListePlayer *lp, Player *p)
 {
     if (lp->first == NULL)
@@ -478,16 +536,18 @@ bool estMortMonster(Monster m)
     return m.hp <= 0;
 }
 
-int combat1(Player *p, ListeMonstre l)
+int combat1(Player *p, ListeMonstre *l)
 {
-    while (!estVide(l))
+    clear();
+    while (!estVide(*l))
     {
         int result;
-        Monster *m = l;
-        printf("\nVotre score est de %d\n", p->score);
+        Monster *m = *l;
+
         while (!estMortPlayer(*p) && !estMortMonster(*m))
         {
-            afficherListeMonstre(l);
+            printf("\nVotre score est de %d\n", p->score);
+            afficherListeMonstre(*l);
             printf("\n\n\n\n\n");
             result = ResultatDuel(p, m);
         }
@@ -496,16 +556,18 @@ int combat1(Player *p, ListeMonstre l)
         {
             Contexte(-1);
             affichagePlayer(*p);
-            afficherListeMonstre(l);
+            afficherListeMonstre(*l);
             return -1;
         }
         if (estMortMonster(*m))
         {
-            l = removeHeadMonster(l);
-            printf("Vous avez battu %s\nIl vous reste %d hp\nIl reste %d monstres à affronter.", m->name, p->hp, hauteurListeMonstre(l));
+            *l = removeHeadMonster(*l);
+            printf("Vous avez battu %s\nIl vous reste %d hp\nIl reste %d monstres à affronter.", m->name, p->hp, hauteurListeMonstre(*l));
             p->score += m->level * 50;
         }
     }
+    printf("\nVotre score est de %d\n", p->score);
+    p->ngame += 1;
     return 1;
 }
 
@@ -538,12 +600,70 @@ int combat2(Player *p, ListeMonstre l)
     }
 }
 
-void load(void)
+Player *lirePlayer(FILE *f)
 {
+    char pseudo[16];
+    int score, ngame;
+    Player *p = (Player *)malloc(sizeof(Player));
+    if (p == NULL)
+    {
+        printf("Erreur d'allocation mémoire\n");
+        exit(1);
+    }
+    printf("TestLirePlayer\n");
+    fscanf(f, "%s %d %d", pseudo, &score, &ngame);
+    printf("TestLirePlayer1\n");
+    printf("nom: %s\tscore: %d\tngame: %d\n", pseudo, &score, &ngame);
+    printf("TestLirePlayer2\n");
+    return p;
 }
 
-void save(ListePlayer lp)
+Score *load(ListePlayer *lp, Score tScore[], int *nb)
 {
+    int score, ngame;
+    char pseudo[16];
+    FILE *f = fopen("score.txt", "r");
+    if (f == NULL)
+    {
+        printf("Erreur d'ouverture du fichier\n");
+        exit(1);
+    }
+    fscanf(f, "%d", nb);
+    printf("Nombre de joueurs: %d\n", *nb);
+    for (int i = 0; i < *nb; i++)
+    {
+        printf("\n\n%d\n", i);
+        fscanf(f, "%s %d %d", pseudo, &score, &ngame);
+        Player *p = createPlayer(pseudo);
+        p->score = score;
+        p->ngame = ngame;
+        printf("nom: %s\tscore: %d\tngame: %d\n", p->pseudo, p->score, p->ngame);
+        addPlayer(lp, p);
+        tScore = saveScore(*p, tScore, *nb);
+        printf("\n%d", i);
+        affichageScore(tScore[i]);
+        printf("\n");
+    }
+    fclose(f);
+    return tScore;
+}
+
+void save(ListePlayer *lp, Score tScore[], int nb)
+{
+    Player *tmp = lp->first;
+    FILE *f = fopen("score.txt", "w");
+    if (f == NULL)
+    {
+        printf("Erreur d'ouverture du fichier\n");
+        exit(1);
+    }
+    fprintf(f, "%d\n", nb);
+    while (tmp != NULL)
+    {
+        fprintf(f, "%s %d %d\n", tmp->pseudo, tmp->score, tmp->ngame);
+        tmp = tmp->suiv;
+    }
+    fclose(f);
 }
 
 int ExperienceRound1(Monster m, Player p) // state = 1 pour une attaque gagnée, 2 pour un monstre vaincu m.level pour le niveau du monstre;
