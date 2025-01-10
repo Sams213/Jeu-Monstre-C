@@ -1,52 +1,5 @@
 #include "sae.h"
 
-/*
-    A RENDRE AVANT LE 10 JANVIER
-
-
-    Règles:
-    - Accolades à la lignes
-    - Nom des variables en english please
-    - Les fonctions sont les plus simples possibles
-    - La doc est écrite au fur et à mesure
-    - Push de code non finit ok mais à annoter et prévenir sur discord
-    - TESTER AVANT DE PUSH!!!
-    - Écrire DONE lorsqu'une fonction est terminée avant sa déclaration
-    - Écrire WIP suivit de son prénom avant la déclaration d'une fonction en cours de développement
-
-
-    TODO:
-    - DONE Fonction qui défini le niveau d'un monstre
-        - Attribuer nb hp, nb weapon, et damage
-
-    - Fonctions de matchs différentes pour chaque phase du jeux:
-        - Gestion des tours
-            - Quelle arme est choisie
-            - DONE Quelle arme gagne
-            - WIP Distribution score gerée par une fonction
-            - Distribution damage
-            - Gestion de la mort
-
-    - Fonction gestion de la mort
-
-    - Fonction de sauvegarde:
-        - Est appelée à chaque fin de match et à la mort du joueur
-
-    - Fonction de statistiques:
-
-
-    TODO later:
-    - Fonction de difficulté: est appelée au dbut de la partie et hange les dégat infligé aux monstres
-
-    - Fonction de narration pour rajouter du contexte au rpg
-        - Afficher du texte
-        - Effacer le terminal
-
-
-    Idées:
-        - Listes Chainées pour les monstres
-*/
-
 void clear(void)
 {
 #ifdef _WIN32
@@ -56,12 +9,6 @@ void clear(void)
 #endif
 }
 
-/**
- * @brief function simulating typing
- *
- * @param str what to print
- * @param delay at which speed
- */
 void simulateTyping(char *str, int delay)
 {
     while (*str)
@@ -73,12 +20,6 @@ void simulateTyping(char *str, int delay)
     }
 }
 
-/**
- * @brief generates a random number
- *
- * @param x stores the number
- * @return int
- */
 int generate_random_number(int x)
 {
     static int initialized = 0;
@@ -91,12 +32,6 @@ int generate_random_number(int x)
     return random_number;
 }
 
-/**
- * @brief Create a Player object
- *
- * @param pseudo
- * @return Player
- */
 Player *createPlayer(char pseudo[])
 {
     Player *p = (Player *)malloc(sizeof(Player));
@@ -110,12 +45,6 @@ Player *createPlayer(char pseudo[])
     return p;
 }
 
-// todo
-/**
- * @brief creates a liste player object
- *
- * @return ListePlayer*
- */
 ListePlayer *createListePlayer(void)
 {
     ListePlayer *l = (ListePlayer *)malloc(sizeof(ListePlayer));
@@ -288,23 +217,11 @@ Player getHeadPlayer(ListePlayer l)
     return *(l.first);
 }
 
-/**
- * @brief create a list of monster
- *
- * @return NULL
- */
 ListeMonstre createListeMonstre(void)
 {
     return NULL;
 }
 
-/**
- * @brief adds monster to the list
- *
- * @param l list of monster
- * @param m specific monster we want to add
- * @return ListeMonstre
- */
 ListeMonstre addMonster(ListeMonstre l, Monster m)
 {
     Monster *new = (Monster *)malloc(sizeof(Monster));
@@ -341,12 +258,6 @@ Monster getHeadMonster(ListeMonstre l)
     return *l;
 }
 
-/**
- * @brief create a monster level 1 as it is specify in the subject
- *
- * @param c
- * @return Monster
- */
 Monster monsterlvl1(char *c)
 {
     Monster *m = (Monster *)malloc(sizeof(Monster));
@@ -359,12 +270,6 @@ Monster monsterlvl1(char *c)
     return *m;
 }
 
-/**
- * @brief create a monster level 2 as it is specify in the subject
- *
- * @param c
- * @return Monster
- */
 Monster monsterlvl2(char *c)
 {
     Monster *m = (Monster *)malloc(sizeof(Monster));
@@ -412,11 +317,6 @@ void affichageListePlayer(ListePlayer l)
     affichagePlayer(*tmp);
 }
 
-/**
- * @brief print on stdout stats of monster according to its level
- *
- * @param m *object* Monster
- */
 void affichageMonstre(Monster m)
 {
     printf("\n%-15s  hp: %-5d  degats: %-5d  niveau de monstre: %-5d\n", m.name, m.hp, m.damage, m.level);
@@ -451,13 +351,6 @@ int hauteurListeMonstre(ListeMonstre l)
     return hauteur;
 }
 
-/**
- * @brief return the result of a fight
- *
- * @param playerWeapon single capital letter identifying player's weapon
- * @param monsterWeapon single capital letter identifying monster's weapon
- * @return int -1 for player's lose, 0 for a draw, 1 for player's win
- */
 int ResultatDuel(Player *p, Monster *m) // playerWeapon = joueur, return 0 for a draw,-1 for a lose, 1 for a win
 {
     int result = 0;
@@ -730,18 +623,18 @@ void Menu(void)
 
     switch (choix)
     {
-    case 1: // TODO APPEL FONCTION
+    case 1:
         break;
-    case 2: // TODO APPEL FONCTION
+    case 2:
         break;
-    case 3: // TODO APPEL FONCTION
+    case 3:
         break;
-    case 4: // TODO APPEL FONCTION
+    case 4:
         break;
-    case 5: // TODO APPEL FONCTION
+    case 5:
         break;
-    case 9: // TODO APPEL FONCTION
-        break;
+    case 9:
+        exit(0);
     default:
         clear();
         Menu();
