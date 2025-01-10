@@ -1,3 +1,10 @@
+/**
+ * @file sae.h
+ * @author Sami, Ghassan et Antonin
+ * @brief ce fichir contient le prototype de chaque fonction
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

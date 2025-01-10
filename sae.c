@@ -1,3 +1,11 @@
+/**
+ * @file sae.c
+ * @author Sami, Ghassan et Antonin
+ * @brief Ce fichier contient le coeur de notre programme
+ * @date 2025-01-10
+ * 
+ */
+
 #include "sae.h"
 
 void clear(void)
