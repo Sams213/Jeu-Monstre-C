@@ -61,14 +61,14 @@ void test(void)
     // affichagePlayer(*p2);
     // printf("Joueur 1");
     // p1->score += 5;
-    printf("\nBefore\n\n\n");
+    // printf("\nBefore\n\n\n");
     tScore = load(lp, tScore, &nb);
-    printf("\n\nAfter\n");
+    // printf("\n\nAfter\n");
     // printf("\n\nJoueur 2");
     // tScore = saveScore(*p2, tScore, &nb);
     // printf("\n\n\n\n\n");
     // affichageScore(tScore[0]);
-    printf("Test\n");
+    // printf("Test\n");
     affichageListeScore(tScore, nb);
     printf("\n\n\n\n\n");
     affichageListePlayer(*lp);
@@ -91,9 +91,33 @@ void test(void)
     // simulateTyping("Bienvenue dans le jeu.     ", 20000);
 }
 
+void global(void)
+{
+    clear();
+    Score *tScore = NULL;
+    int nb = 0;
+    ListePlayer *lp = createListePlayer();
+    tScore = load(lp, tScore, &nb);
+    printf("Bienvenue dans le jeu\n");
+    Player *p;
+    // printf("Bienvenue dans le jeu\n");
+    printf("Quel est votre pseudo ? : ");
+    char pseudo[16];
+    scanf("%s", pseudo);
+    p = recherchePlayer(pseudo, lp);
+
+    printf("Appuyez sur une touche pour continuer...");
+    clear();
+    printf("Bienvenue %s\n", p->pseudo);
+    getchar();
+    // printf("nb = %d\n", nb);
+    Menu(p, &tScore, &nb, lp);
+}
+
 int main(void)
 {
-    test();
+    // test();
+    global();
     return 0;
 }
 

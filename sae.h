@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <unistd.h>
 
+#define DELAY 5000
+
 typedef struct player
 {
     char pseudo[32];
@@ -246,45 +248,7 @@ int combat1(Player *p, ListeMonstre *l);
  * @param l list of monsters
  * @return int victory or defeat
  */
-int combat2(Player *p, ListeMonstre l);
-
-/**
- * @brief give player experience when he kills a monster
- *
- * @author Antonin
- *
- * @param m use to retreive monster's level
- * @param p use to increase player's level
- */
-int ExperienceRound1(Monster m, Player p);
-
-/**
- * @brief gives player experience when he wins an attack
- *
- * @author Antonin
- *
- * @param p use to increase player's level
- */
-void AttaqueGagnee(Player p);
-
-/**
- * @brief gives player experience when he kills a monster in the second phase
- *
- * @author Antonin
- *
- * @param m use to retreive monster's level
- * @param p use to retreive player's level
- */
-int ExperienceRound2(Monster m, Player p);
-
-/**
- * @brief calculate new hp of player
- *
- * @param hp
- * @return int
- */
-int NouvelleHPmonster1(int hp);
-void NouvelleHPmonster3(Player p);
+int combat2(Player *p, ListeMonstre *l);
 
 /**
  * @brief prints peices of contexte to improve gameplay
@@ -295,19 +259,31 @@ void NouvelleHPmonster3(Player p);
  */
 void Contexte(int phase);
 
-/**
- * @brief printf a menu and reacts adequately
- *
- * @author Antonin
- */
-void Menu(void);
-
 void affichageScore(Score s);
 
-Score *saveScore(Player p, Score tScore[], int nb);
+Score *saveScore(Player p, Score tScore[], int *nb);
 
 void affichageListeScore(Score tScore[], int nb);
 
 void save(ListePlayer *lp, Score tScore[], int nb);
 
 Score *load(ListePlayer *lp, Score tScore[], int *nb);
+
+int longueur(ListePlayer lp);
+
+/**
+ * @brief printf a menu and reacts adequately
+ *
+ * @author Antonin
+ */
+void Menu(Player *p, Score *tScore[], int *nb, ListePlayer *lp);
+
+Player *recherchePlayer(char *c, ListePlayer *lp);
+
+void statistiques(Score tscore[], int n);
+
+Monster monsterlvl7(char *c);
+
+void affichageListeScoreRecursive(Score tScore[], int index, int nb);
+
+void rechercheDichotomiqueScore(Score tScore[], int nb, int n);
