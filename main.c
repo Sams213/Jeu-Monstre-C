@@ -1,3 +1,12 @@
+/**
+ * @file main.c
+ * @author Sami, Ghassan et Antonin
+ * @brief ce fichier est utiliser pour tester les fonctions
+ * @date 2025-01-10
+ * 
+ * 
+ */
+
 #include "sae.h"
 
 void test(void)
